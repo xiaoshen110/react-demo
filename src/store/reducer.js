@@ -1,11 +1,8 @@
-import { INPUT_CHANGE, ADD_LIST, DELETE_LIST } from './actionTypes'
+import { INPUT_CHANGE, ADD_LIST, DELETE_LIST, GET_LIST } from './actionTypes'
 
 let defaultState = {
-  inputValue: '请输入',
-  lists: [
-    'js',
-    'python'
-  ]
+  inputValue: '',
+  lists: []
 }
 export default (state = defaultState, action) => {
   console.log(state, action)
@@ -28,6 +25,12 @@ export default (state = defaultState, action) => {
     let newState = JSON.parse(JSON.stringify(state))
     console.log('action.value', action.value)
     newState.lists.splice(action.value)
+    return newState
+  }
+
+  if (action.type === GET_LIST) {
+    let newState = JSON.parse(JSON.stringify(state))
+    newState.lists = action.value
     return newState
   }
   return state
